@@ -54,7 +54,10 @@ while true; do
             sh creditos.sh creditos
             ;;
         reproductor)
-            sh reproductor.sh
+            sh reproductor.sh reproductor
+            ;;
+        gato)
+            sh gato.sh gato
             ;;
         *)
             if command -v "$comando" >/dev/null 2>&1; then
