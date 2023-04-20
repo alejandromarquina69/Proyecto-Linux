@@ -30,41 +30,32 @@ if ! echo "$contrasena" | sudo -S id -u >/dev/null 2>&1; then
 fi
 
 # Comandos
-echo "\nBienvenido, $usuario"
-while true; do
-    read -p ">$usuario:$(pwd)$ " comando
-    case $comando in
-        salir)
-            echo "¡Hasta luego!"
+trap '' INT
+stty susp ^0
+ruta=$(pwd) 
+comandos=("ayuda" "buscar" "gato" "infosisPro" "creditos" "fecha" "reproductor")
+comando=""
+while true;
+do
+    terminalnueva="$(pwd)"
+    printf ">""\e[0;36m$terminalnueva\e[0;37m " 
+    read -e -p " " comando 
+    for aux in "${comandos[@]}"
+    do
+        # Compara si la palabra dada es igual a un comando
+        if [ "$comando" == "$aux" ]
+        then
+                . "$ruta/$comando.sh"
+                comando=" "
+                break
+        fi
+    done
+    if [ "$comando" == "salir" ]; then
+            comando=" "
             break
-            ;;
-        ayuda)
-            sh ayuda.sh ayuda
-            ;;
-        infosis)
-            sh infosisPro.sh infosisPro
-            ;;
-        fecha)
-            sh fecha.sh fecha
-            ;;
-        buscar)
-            sh buscar.sh buscar
-            ;;
-        creditos)
-            sh creditos.sh creditos
-            ;;
-        reproductor)
-            sh reproductor.sh reproductor
-            ;;
-        gato)
-            sh gato.sh gato
-            ;;
-        *)
-            if command -v "$comando" >/dev/null 2>&1; then
-                "$comando"
-            else
-                echo "Comando no reconocido, escriba 'ayuda' para ver la lista de comandos disponibles"
-            fi
-            ;;
-    esac
+    fi
+    $comando
+    
 done
+
+echo "Hasta luego."
