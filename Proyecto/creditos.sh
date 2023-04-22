@@ -9,8 +9,8 @@ function mostrar_creditos {
     echo "Email : [luismarioolivos05@gmail.com]"
     echo "Git Hub : [https://github.com/LuisOJ]"
     echo "Programador : [Marquina Vazquez Alejandro Jair]"
-    echo "Email : [correo electrónico]"
-    echo "Git Hub : [link]"
+    echo "Email : [alejandromarquina69@gmail.com]"
+    echo "Git Hub : [https://github.com/alejandromarquina69]"
     echo "==================================="
 }
 
